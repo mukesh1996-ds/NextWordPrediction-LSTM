@@ -1,4 +1,4 @@
-Here's a complete and professional-style `README.md` for your **LSTM Next-Word Prediction** project based on the structure and files we’ve discussed:
+**LSTM Next-Word Prediction** project based on the structure and files:
 
 ---
 
