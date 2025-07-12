@@ -1,13 +1,7 @@
-Here's a complete and professional-style `README.md` for your **LSTM Next-Word Prediction** project based on the structure and files we’ve discussed:
 
----
-
-```markdown
 # 🧠 LSTM-Based Next Word Prediction
 
 This project implements an end-to-end LSTM neural network that learns to predict the **next word** in a sentence based on a custom text corpus. It's built using TensorFlow/Keras and includes all stages from data preprocessing to model inference.
-
----
 
 ## 📁 Project Structure
 
@@ -131,12 +125,3 @@ Output: "powerful"
 * Add beam search for more realistic predictions
 * Train on larger text corpora (e.g., Wikipedia dump)
 * Convert into a Streamlit app
-
----
-
-## 📜 License
-
-This project uses public domain data and is provided for educational and research use only.
-
----
-

@@ -10,15 +10,18 @@ def clean_text(text):
     text = re.sub(r'\s+', ' ', text)
     return text.strip()
 
-def prepare_sequences(filepath, vocab_size=10000, max_seq_len=5):
+def prepare_sequences(filepath, max_seq_len=5):
     with open(filepath, 'r', encoding='utf-8') as f:
         corpus = f.read()
-    
-    cleaned = clean_text(corpus)
-    lines = cleaned.split('.')
 
-    tokenizer = Tokenizer(num_words=vocab_size, oov_token="<OOV>")
+    cleaned = clean_text(corpus)
+    lines = cleaned.split('.')  # basic sentence splitting
+
+    # Tokenization
+    tokenizer = Tokenizer(oov_token="<OOV>")
     tokenizer.fit_on_texts(lines)
+    word_index = tokenizer.word_index
+    vocab_size = len(word_index) + 1  # +1 for padding or OOV
 
     sequences = []
     for line in lines:
@@ -28,10 +31,14 @@ def prepare_sequences(filepath, vocab_size=10000, max_seq_len=5):
             sequences.append(n_gram)
 
     sequences = np.array(pad_sequences(sequences, maxlen=max_seq_len, padding='pre'))
-    
-    X, y = sequences[:, :-1], sequences[:, -1]
+
+    X = sequences[:, :-1]
+    y = sequences[:, -1]
+
+    # One-hot encode y with the actual vocab size
     y = np.eye(vocab_size)[y]
 
+    # Save tokenizer for future use
     with open("outputs/tokenizer.pkl", "wb") as f:
         pickle.dump(tokenizer, f)
 
